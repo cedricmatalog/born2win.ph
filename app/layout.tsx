@@ -1,20 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Born2Win - Forex Trading Education",
-  description: "The #1 Forex Education Provider in the Philippines. Learn to trade with Coaches Ferdie and Alyanna.",
+  title: "Born2WinPh — Asia's #1 Forex Trading Education",
+  description: "Learn forex trading from the most trusted coaches in Asia. Free 3-hour online workshop available worldwide.",
 };
 
 export default function RootLayout({
@@ -24,11 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

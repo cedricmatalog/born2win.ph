@@ -5,73 +5,169 @@ import FAQ from "../components/FAQ";
 import WebinarDates from "../components/WebinarDates";
 import Link from "next/link";
 
+const BENEFITS = [
+  { num: '01', title: 'Live Expert Coaching', desc: 'Learn directly from Coach Ferdie and Coach Alyanna — 35 years of combined forex expertise distilled into 3 focused hours.' },
+  { num: '02', title: 'Zero Prior Experience Required', desc: 'This webinar is engineered for absolute beginners. We strip away jargon and build your foundation from the ground up.' },
+  { num: '03', title: 'Real Market Analysis', desc: 'Watch live chart readings, pattern identification, and entry/exit strategy demos on real market data.' },
+  { num: '04', title: 'Risk Management Framework', desc: 'The #1 skill that separates profitable traders. We teach our proprietary 3-step framework every student applies.' },
+];
+
 export default function FreeWebinar() {
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-yellow-500 selection:text-black">
+    <main style={{ minHeight: '100vh', background: 'var(--obsidian)', color: 'var(--text-primary)' }}>
       <Navbar />
-      
-      {/* Webinar Hero */}
-      <section className="relative overflow-hidden bg-black py-20 sm:py-32">
-        <div className="container mx-auto px-4 sm:px-8 relative z-10">
-          <div className="mx-auto max-w-4xl text-center">
 
-            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl mb-6">
-              Forex Trading Courses <br />
-              <span className="text-2xl sm:text-4xl font-normal text-gray-300 block mt-4">
-                with <span className="text-yellow-500 font-bold">Born2WinPh</span> Forex Trading Education
-              </span>
-            </h1>
-            <p className="mt-8 text-xl leading-8 text-gray-300 max-w-2xl mx-auto">
-              Begin your forex trading adventure with us and embark on a journey towards financial mastery.
-            </p>
-            <p className="mt-4 text-lg leading-8 text-gray-400 max-w-2xl mx-auto">
-              We provide the tools, insights, and guidance you need to navigate the dynamic world of forex trading, ensuring a solid foundation for your trading success.
-            </p>
+      {/* ── HERO ── */}
+      <section style={{
+        position: 'relative', overflow: 'hidden',
+        background: 'var(--obsidian)',
+        padding: 'clamp(6rem, 12vw, 10rem) 0 clamp(4rem, 8vw, 7rem)',
+        borderBottom: '1px solid rgba(212,175,55,0.08)',
+      }}>
+        {/* Grid texture */}
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 0,
+          backgroundImage: `linear-gradient(rgba(212,175,55,0.04) 1px, transparent 1px),linear-gradient(90deg,rgba(212,175,55,0.04) 1px,transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }} />
+        {/* Glow left */}
+        <div style={{ position: 'absolute', top: '15%', left: '-10%', width: '700px', height: '700px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(212,175,55,0.07) 0%,transparent 65%)', filter: 'blur(60px)', zIndex: 0 }} />
+        {/* Glow right */}
+        <div style={{ position: 'absolute', bottom: '0', right: '5%', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(212,175,55,0.05) 0%,transparent 70%)', filter: 'blur(40px)', zIndex: 0 }} />
+        {/* Ghost letters */}
+        <div className="section-num" style={{ position: 'absolute', bottom: '-3rem', right: '-1rem', zIndex: 0, opacity: 0.3, fontSize: 'clamp(8rem,22vw,20rem)' }}>FW</div>
+
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', alignItems: 'flex-end' }} className="fw-hero-grid">
+            {/* Left: Headline */}
+            <div>
+              <div className="section-eyebrow" style={{ marginBottom: '1.5rem' }}>
+                <span className="section-eyebrow__label">Free 3-Hour Webinar</span>
+                <div className="section-eyebrow__rule" />
+              </div>
+              <h1 className="font-display fade-up fade-up-1" style={{
+                fontSize: 'clamp(3.5rem,10vw,8.5rem)', lineHeight: 0.92,
+                letterSpacing: '0.02em', color: 'var(--text-primary)', margin: 0,
+              }}>
+                Forex Trading<br />Courses<br /><span className="text-shimmer">With Born2WinPh</span>
+              </h1>
+            </div>
+
+            {/* Right: Description + stats */}
+            <div className="fade-up fade-up-2">
+              <p style={{ fontSize: '1rem', lineHeight: 1.85, fontWeight: 300, color: 'var(--text-secondary)', maxWidth: '400px', marginBottom: '2.5rem' }}>
+                Begin your forex trading adventure with us. We provide the tools, insights, and guidance you need to navigate the dynamic world of forex trading — building a solid foundation for lasting success.
+              </p>
+              <div style={{ display: 'flex', gap: '2.5rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+                {[
+                  { n: '3 hrs', l: 'Session Length' },
+                  { n: 'FREE', l: 'No Cost to Attend' },
+                  { n: 'LIVE', l: 'Interactive Format' },
+                ].map((s, i) => (
+                  <div key={i}>
+                    <div className="font-display" style={{ fontSize: '2rem', color: 'var(--gold)', letterSpacing: '0.04em' }}>{s.n}</div>
+                    <div style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-secondary)', marginTop: '2px' }}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
+              <Link href="#dates" className="btn-gold" style={{ display: 'inline-block' }}>
+                Reserve My Spot →
+              </Link>
+            </div>
           </div>
-        </div>
-        
-        {/* Glow Effect */}
-        <div className="absolute top-0 left-1/2 -z-10 -translate-x-1/2 blur-3xl xl:-top-6">
-          <div className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#fbbf24] to-[#d97706] opacity-10" 
-               style={{ clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)' }}
-          />
         </div>
       </section>
 
-      <WebinarDates />
+      {/* ── WHAT YOU'LL LEARN ── */}
+      <section style={{ background: '#0A0A0A', padding: 'clamp(4rem,8vw,7rem) 0', borderBottom: '1px solid rgba(212,175,55,0.08)', position: 'relative', overflow: 'hidden' }}>
+        <div className="section-num" style={{ position: 'absolute', top: '-2rem', right: '-1rem', opacity: 0.25, fontSize: 'clamp(6rem,16vw,14rem)' }}>01</div>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem', alignItems: 'start' }} className="learn-grid">
+            {/* Label col */}
+            <div>
+              <div className="section-eyebrow">
+                <span className="section-eyebrow__label">What You&apos;ll Learn</span>
+                <div className="section-eyebrow__rule" />
+              </div>
+              <h2 className="section-heading" style={{ marginBottom: '1.5rem' }}>
+                Built For<br /><span className="text-gradient-gold">Complete Beginners</span>
+              </h2>
+              <div className="gold-rule" style={{ maxWidth: '120px' }} />
+              <p style={{ fontSize: '0.9rem', lineHeight: 1.85, fontWeight: 300, color: 'var(--text-secondary)', marginTop: '1.5rem', maxWidth: '360px' }}>
+                No trading background required. This 3-hour session is the fastest path from zero knowledge to confident market reading.
+              </p>
+            </div>
 
-      <section className="bg-black py-16 text-center border-t border-white/5">
-        <div className="container mx-auto px-4 sm:px-8">
-           <h2 className="text-2xl font-bold text-white mb-6">Top-notch Training Program:</h2>
-           <div className="inline-block p-6 rounded-2xl bg-zinc-900 border border-white/10">
-             <p className="text-lg text-yellow-500 font-medium mb-2">Check Out Our 5-Star Rating</p>
-             <p className="text-gray-400">From Student Reviews on Facebook and Google</p>
-             <div className="flex justify-center gap-1 mt-4 text-yellow-500 text-2xl">
-               ★★★★★
-             </div>
-           </div>
+            {/* Benefits col */}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {BENEFITS.map((b, i) => (
+                <div key={i} className="hover-row" style={{
+                  display: 'grid', gridTemplateColumns: '64px 1fr',
+                  gap: '1.5rem', padding: '2rem 0',
+                  borderTop: '1px solid rgba(255,255,255,0.05)',
+                  alignItems: 'flex-start',
+                }}>
+                  <span className="font-display" style={{ fontSize: '2rem', color: 'transparent', WebkitTextStroke: '1px rgba(212,175,55,0.3)', lineHeight: 1, paddingTop: '3px' }}>{b.num}</span>
+                  <div>
+                    <h3 className="font-display" style={{ fontSize: '1.4rem', letterSpacing: '0.04em', color: 'var(--text-primary)', margin: 0, marginBottom: '0.5rem' }}>{b.title}</h3>
+                    <p style={{ fontSize: '0.88rem', lineHeight: 1.8, fontWeight: 300, color: 'var(--text-secondary)', margin: 0 }}>{b.desc}</p>
+                  </div>
+                </div>
+              ))}
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── DATES ── */}
+      <div id="dates">
+        <WebinarDates />
+      </div>
+
+      {/* ── 5-STAR RATING ── */}
+      <section style={{ background: 'var(--obsidian)', padding: 'clamp(4rem,8vw,7rem) 0', borderBottom: '1px solid rgba(212,175,55,0.08)', position: 'relative', overflow: 'hidden' }}>
+        <div className="section-num" style={{ position: 'absolute', bottom: '-2rem', left: '-1rem', opacity: 0.2, fontSize: 'clamp(6rem,16vw,14rem)' }}>02</div>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', alignItems: 'center' }} className="rating-grid">
+            <div>
+              <div className="section-eyebrow">
+                <span className="section-eyebrow__label">Student Reviews</span>
+                <div className="section-eyebrow__rule" />
+              </div>
+              <h2 className="section-heading">
+                The Numbers<br /><span className="text-gradient-gold">Speak For Themselves</span>
+              </h2>
+            </div>
+            <div style={{ display: 'flex', gap: '1px', background: 'rgba(212,175,55,0.08)', flexWrap: 'wrap' }}>
+              {[
+                { n: '★★★★★', l: 'Overall Rating', sub: 'Facebook & Google Reviews' },
+                { n: '300K+', l: 'Students Trained', sub: 'Across Asia and beyond' },
+                { n: '4 yrs', l: 'Of Excellence', sub: 'Helping Filipinos win' },
+              ].map((s, i) => (
+                <div key={i} className="hover-card" style={{ background: 'var(--obsidian)', padding: '2.5rem', flex: '1', minWidth: '180px' }}>
+                  <div className="font-display" style={{ fontSize: '2.5rem', color: 'var(--gold)', letterSpacing: '0.04em', lineHeight: 1, marginBottom: '0.75rem' }}>{s.n}</div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-primary)', marginBottom: '4px' }}>{s.l}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{s.sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       <Testimonials />
       <FAQ />
-      
-      {/* Course Enrollment CTA from Footer Links */}
-      <section className="bg-yellow-500 py-12">
-        <div className="container mx-auto px-4 sm:px-8 text-center">
-          <h2 className="text-2xl font-black text-black mb-6 uppercase">Ready to Start?</h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-             <Link href="/" className="px-8 py-3 bg-black text-white font-bold rounded-full hover:bg-zinc-800 transition-colors">
-               Back to Home
-             </Link>
-             <button className="px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-100 transition-colors">
-               Course Enrollment
-             </button>
-          </div>
-        </div>
-      </section>
 
       <Footer />
+
+      <style>{`
+        @media (min-width: 900px) {
+          .fw-hero-grid { grid-template-columns: 1fr 1fr !important; }
+          .learn-grid   { grid-template-columns: 1fr 1.5fr !important; }
+          .rating-grid  { grid-template-columns: 1fr 2fr !important; }
+        }
+      `}</style>
     </main>
   );
 }

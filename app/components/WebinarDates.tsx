@@ -1,52 +1,73 @@
-const dates = [
-  "Jan 21, Wed, 12pm-3pm",
-  "Jan 24, Sat, 12pm-3pm",
-  "Jan 28, Wed, 1pm-4pm",
-  "Jan 30, Fri, 1pm-4pm",
-  "Feb 1, Sun, 1pm-4pm",
-  "Feb 4, Wed, 1pm-4pm"
+const DATES = [
+  { date: "Jan 21", day: "Wed", time: "12pm – 3pm", spots: "12 spots left" },
+  { date: "Jan 24", day: "Sat", time: "12pm – 3pm", spots: "8 spots left" },
+  { date: "Jan 28", day: "Wed", time: "1pm – 4pm", spots: "15 spots left" },
+  { date: "Jan 30", day: "Fri", time: "1pm – 4pm", spots: "20 spots left" },
+  { date: "Feb 1",  day: "Sun", time: "1pm – 4pm", spots: "18 spots left" },
+  { date: "Feb 4",  day: "Wed", time: "1pm – 4pm", spots: "14 spots left" },
 ];
 
 export default function WebinarDates() {
   return (
-    <section className="bg-zinc-900 py-16 sm:py-24">
-      <div className="container mx-auto px-4 sm:px-8">
-        <div className="mx-auto max-w-3xl text-center mb-12">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Free Introductory Forex Trading Webinar For Beginners
-          </h2>
-          <p className="text-yellow-500 text-lg font-medium italic">
-            (Choose one preferred date and time)
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
-          {dates.map((date, index) => (
-            <div 
-              key={index} 
-              className="group relative flex items-center justify-between p-6 rounded-xl bg-black/40 border border-white/10 hover:border-yellow-500/50 hover:bg-black/60 transition-all cursor-pointer"
-            >
-              <div className="flex items-center gap-4">
-                <div className="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-yellow-500 group-hover:text-black transition-colors">
-                  <svg className="h-6 w-6 text-gray-400 group-hover:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <span className="text-lg font-medium text-white">{date}</span>
-              </div>
-              <div className="h-6 w-6 rounded-full border border-white/20 group-hover:border-yellow-500 group-hover:bg-yellow-500 transition-all flex items-center justify-center">
-                <div className="h-2 w-2 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
+    <section style={{ background: '#0A0A0A', padding: 'clamp(4rem,8vw,7rem) 0', borderBottom: '1px solid rgba(212,175,55,0.08)', position: 'relative', overflow: 'hidden' }}>
+      <div className="section-num" style={{ position: 'absolute', bottom: '-2rem', right: '-1rem', opacity: 0.2, fontSize: 'clamp(6rem,16vw,14rem)' }}>03</div>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem', alignItems: 'start' }} className="dates-layout">
+
+          {/* Header col */}
+          <div>
+            <div className="section-eyebrow">
+              <span className="section-eyebrow__label">Choose a Date</span>
+              <div className="section-eyebrow__rule" />
             </div>
-          ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <button className="w-full sm:w-auto bg-yellow-500 text-black px-12 py-4 rounded-full font-black hover:bg-yellow-400 transition-all shadow-xl shadow-yellow-500/20 uppercase tracking-widest text-sm">
-            Reserve My Spot
-          </button>
+            <h2 className="section-heading" style={{ marginBottom: '1.5rem' }}>
+              Free Introductory<br />Webinar<br /><span className="text-gradient-gold">For Beginners</span>
+            </h2>
+            <div className="gold-rule" style={{ maxWidth: '120px', marginBottom: '1.5rem' }} />
+            <p style={{ fontSize: '0.9rem', lineHeight: 1.8, fontWeight: 300, color: 'var(--text-secondary)', maxWidth: '300px' }}>
+              Select one preferred date and time below. All sessions are hosted live online — 3 hours, completely free.
+            </p>
+          </div>
+
+          {/* Dates col */}
+          <div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'rgba(212,175,55,0.08)', marginBottom: '2rem' }}>
+              {DATES.map((d, i) => (
+                <div key={i} className="hover-row" style={{
+                  background: 'var(--surface)',
+                  display: 'grid', gridTemplateColumns: '80px 1fr auto',
+                  gap: '1.5rem', alignItems: 'center',
+                  padding: '1.25rem 1.5rem', cursor: 'pointer',
+                }}>
+                  {/* Date block */}
+                  <div style={{ textAlign: 'center', borderRight: '1px solid rgba(212,175,55,0.1)', paddingRight: '1.5rem' }}>
+                    <div className="font-display" style={{ fontSize: '1.6rem', color: 'var(--gold)', letterSpacing: '0.02em', lineHeight: 1 }}>{d.date}</div>
+                    <div style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-secondary)', marginTop: '3px' }}>{d.day}</div>
+                  </div>
+
+                  {/* Time + spots */}
+                  <div>
+                    <div style={{ fontSize: '0.95rem', color: 'var(--text-primary)', fontWeight: 400 }}>{d.time}</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--gold)', letterSpacing: '0.08em', marginTop: '2px', opacity: 0.75 }}>{d.spots}</div>
+                  </div>
+
+                  {/* Radio */}
+                  <div style={{ width: '20px', height: '20px', border: '1px solid rgba(212,175,55,0.3)', borderRadius: '50%', flexShrink: 0 }} />
+                </div>
+              ))}
+            </div>
+
+            <button className="btn-gold">Reserve My Spot →</button>
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @media (min-width: 900px) {
+          .dates-layout { grid-template-columns: 1fr 1.5fr !important; }
+        }
+      `}</style>
     </section>
   );
 }

@@ -1,125 +1,153 @@
 "use client";
 
 import Link from 'next/link';
-import { useState } from 'react';
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+
+const NAV_LINKS = [
+  { href: '/', label: 'Home' },
+  { href: '/free-webinar', label: 'Free Webinar' },
+  { href: '/about', label: 'About' },
+  { href: '/features', label: 'Features' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/global', label: 'Global Students' },
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 40);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-8">
-        <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 bg-gradient-to-tr from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center font-bold text-black">
-              B
-            </div>
-            <span className="text-lg font-bold tracking-tight text-white">Born2WinPh</span>
-          </Link>
-        </div>
-        
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
-          <Link href="/" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-            Home
-          </Link>
-          <Link href="/free-webinar" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-            Free Webinar
-          </Link>
-          <Link href="/about" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-            About
-          </Link>
-          <Link href="/features" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-            Features
-          </Link>
-          <Link href="/contact" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-            Contact
-          </Link>
-          <Link href="/global" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-            Global Students
-          </Link>
+    <>
+    <style>{`
+      .nav-desktop { display: none; }
+      .nav-burger  { display: flex; }
+      #nav-cta     { display: none; }
+      @media (min-width: 768px) {
+        .nav-desktop { display: flex; }
+        .nav-burger  { display: none; }
+        #nav-cta     { display: inline-block; }
+      }
+    `}</style>
+    <nav
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+        width: '100%',
+        transition: 'background 0.4s ease, border-color 0.4s ease',
+        background: scrolled ? 'rgba(8,8,8,0.97)' : 'rgba(8,8,8,0.6)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: scrolled ? '1px solid rgba(212,175,55,0.2)' : '1px solid rgba(212,175,55,0.06)',
+      }}
+    >
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' }}>
+
+        {/* Logo */}
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <Image
+            src="/Logo-Gray.png"
+            alt="Born2WinPh"
+            width={140}
+            height={40}
+            style={{ objectFit: 'contain', height: '36px', width: 'auto' }}
+            priority
+          />
+        </Link>
+
+        {/* Desktop links */}
+        <div style={{ gap: '2.5rem', alignItems: 'center' }} className="nav-desktop">
+          {NAV_LINKS.map(function renderNavLink(l) {
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="hover-gold"
+                style={{
+                  fontSize: '0.72rem',
+                  fontWeight: 500,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--text-secondary)',
+                  textDecoration: 'none',
+                }}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
         </div>
 
-        <div className="flex items-center gap-4">
-          <Link
-            href="/free-webinar"
-            className="hidden sm:inline-flex h-9 items-center justify-center rounded-full bg-yellow-500 px-5 py-2 text-sm font-bold text-black transition-colors hover:bg-yellow-400"
-          >
-            Register Now
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <Link href="/free-webinar" className="btn-gold" style={{ textDecoration: 'none', fontSize: '0.7rem' }} id="nav-cta">
+            Register Free
           </Link>
-          
-          {/* Mobile Menu Button */}
-          <button 
+
+          {/* Mobile burger */}
+          <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-gray-300 hover:text-white focus:outline-none"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', color: 'var(--gold)' }}
+            className="nav-burger"
           >
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
               {isOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path d="M1 1L21 15M21 1L1 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <>
+                  <line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="0" y1="8" x2="22" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </>
               )}
             </svg>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden border-t border-white/10 bg-black">
-          <div className="flex flex-col space-y-4 px-4 py-6">
-            <Link 
-              href="/" 
-              onClick={() => setIsOpen(false)}
-              className="text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-md transition-colors"
-            >
-              Home
-            </Link>
-            <Link 
-              href="/free-webinar" 
-              onClick={() => setIsOpen(false)}
-              className="text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-md transition-colors"
-            >
-              Free Webinar
-            </Link>
-            <Link 
-              href="/about" 
-              onClick={() => setIsOpen(false)}
-              className="text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-md transition-colors"
-            >
-              About
-            </Link>
-            <Link 
-              href="/features" 
-              onClick={() => setIsOpen(false)}
-              className="text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-md transition-colors"
-            >
-              Features
-            </Link>
-            <Link 
-              href="/contact" 
-              onClick={() => setIsOpen(false)}
-              className="text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-md transition-colors"
-            >
-              Contact
-            </Link>
-            <Link 
-              href="/global" 
-              onClick={() => setIsOpen(false)}
-              className="text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-md transition-colors"
-            >
-              Global Students
-            </Link>
-            <Link
-              href="/free-webinar"
-              onClick={() => setIsOpen(false)}
-              className="mt-4 flex items-center justify-center rounded-full bg-yellow-500 px-5 py-3 text-base font-bold text-black hover:bg-yellow-400 transition-colors"
-            >
-              Register Now
-            </Link>
-          </div>
+        <div style={{
+          background: '#0A0A0A',
+          borderTop: '1px solid var(--border)',
+          padding: '1.5rem 2rem 2rem',
+        }}>
+          {NAV_LINKS.map(function renderMobileLink(l, i) {
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setIsOpen(false)}
+                style={{
+                  display: 'block',
+                  fontSize: '0.8rem',
+                  fontWeight: 500,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: 'var(--text-secondary)',
+                  textDecoration: 'none',
+                  padding: '0.75rem 0',
+                  borderBottom: i < NAV_LINKS.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
+                }}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
+          <Link href="/free-webinar" onClick={() => setIsOpen(false)} className="btn-gold" style={{ display: 'inline-block', marginTop: '1.5rem', textDecoration: 'none' }}>
+            Register Free
+          </Link>
         </div>
       )}
     </nav>
+    </>
   );
 }

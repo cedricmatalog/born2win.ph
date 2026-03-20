@@ -1,56 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Sora:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
+  --font-sans: 'Sora', sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  --background: #000000;
-  --foreground: #ededed;
+  --gold: #D4AF37;
+  --gold-light: #F0D060;
+  --gold-dark: #A08020;
+  --obsidian: #080808;
+  --surface: #111111;
+  --surface-2: #1A1A1A;
+  --border: rgba(212, 175, 55, 0.15);
+  --text-primary: #F5F0E8;
+  --text-secondary: #8A8070;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+html {
   scroll-behavior: smooth;
 }
 
-@layer utilities {
-  .text-gradient-gold {
-    @apply bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent;
-  }
-  
-  .bg-gradient-gold {
-    @apply bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600;
-  }
-
-  .btn-glow {
-    @apply shadow-[0_0_20px_rgba(234,179,8,0.3)] hover:shadow-[0_0_30px_rgba(234,179,8,0.5)] transition-all duration-300;
-  }
-
-  .glass-panel {
-    @apply bg-white/5 backdrop-blur-md border border-white/10;
-  }
-  
-  .animate-fade-up {
-    animation: fadeUp 0.8s ease-out forwards;
-    opacity: 0;
-    transform: translateY(20px);
-  }
+body {
+  background: var(--obsidian);
+  color: var(--text-primary);
+  font-family: 'Sora', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  overflow-x: hidden;
 }
+
+/* Typography */
+.font-display {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.font-serif {
+  font-family: 'DM Serif Display', serif;
+}
+
+/* Gold utilities */
+.text-gold {
+  color: var(--gold);
+}
+
+.text-gold-light {
+  color: var(--gold-light);
+}
+
+.bg-gold {
+  background: var(--gold);
+}
+
+.border-gold {
+  border-color: var(--gold);
+}
+
+/* Gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold shimmer text */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold-dark) 0%,
+    var(--gold-light) 30%,
+    var(--gold) 50%,
+    var(--gold-light) 70%,
+    var(--gold-dark) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+/* Noise texture overlay */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+
+/* Gold line accent */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* Scanline effect */
+.scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.05) 2px,
+    rgba(0,0,0,0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Section number style */
+.section-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(6rem, 15vw, 14rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(212, 175, 55, 0.12);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Candlestick chart animation */
+.candle-body {
+  animation: candleGrow 2s ease-in-out infinite alternate;
+  transform-origin: bottom;
+}
+
+.candle-body:nth-child(2) { animation-delay: 0.3s; }
+.candle-body:nth-child(3) { animation-delay: 0.6s; }
+.candle-body:nth-child(4) { animation-delay: 0.9s; }
+.candle-body:nth-child(5) { animation-delay: 1.2s; }
+.candle-body:nth-child(6) { animation-delay: 1.5s; }
+.candle-body:nth-child(7) { animation-delay: 1.8s; }
+
+@keyframes candleGrow {
+  0% { transform: scaleY(0.6); }
+  100% { transform: scaleY(1); }
+}
+
+/* Fade up animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.fade-up-1 { animation-delay: 0.1s; }
+.fade-up-2 { animation-delay: 0.25s; }
+.fade-up-3 { animation-delay: 0.4s; }
+.fade-up-4 { animation-delay: 0.55s; }
 
 @keyframes fadeUp {
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Ticker tape */
+.ticker-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-content {
+  display: inline-block;
+  animation: ticker 25s linear infinite;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Gold button */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: var(--gold);
+  color: #000;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 1rem 2.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: left 0.4s ease;
+}
+
+.btn-gold:hover::before {
+  left: 100%;
+}
+
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.35);
+}
+
+/* Ghost button */
+.btn-ghost {
+  background: transparent;
+  color: var(--gold);
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 0.9rem 2.5rem;
+  border: 1px solid var(--gold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(212, 175, 55, 0.08);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.15);
+}
+
+/* Card surface */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(212,175,55,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Horizontal scrollbar hide */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Gold dot pulse */
+.dot-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* Diagonal stripe pattern */
+.stripe-bg {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(212, 175, 55, 0.02) 10px,
+    rgba(212, 175, 55, 0.02) 20px
+  );
+}
+
+/* ─── Hover utility classes ─── */
+
+/* Text hover: secondary → gold */
+.hover-gold {
+  transition: color 0.2s;
+}
+.hover-gold:hover {
+  color: var(--gold);
+}
+
+/* Text hover: secondary → primary */
+.hover-text-primary {
+  transition: color 0.2s;
+}
+.hover-text-primary:hover {
+  color: var(--text-primary);
+}
+
+/* Row hover: transparent → faint gold bg */
+.hover-row {
+  transition: background 0.2s;
+}
+.hover-row:hover {
+  background: rgba(212, 175, 55, 0.02);
+}
+
+/* Card hover: darken background */
+.hover-card {
+  transition: background 0.2s;
+}
+.hover-card:hover {
+  background: #111111;
+}
+
+/* Social icon hover */
+.hover-social {
+  transition: color 0.2s, border-color 0.2s;
+}
+.hover-social:hover {
+  color: var(--gold);
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+/* Video play button hover */
+.video-box:hover .play-btn {
+  transform: scale(1.1);
+}
+
+/* ─── Section header ─── */
+
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-eyebrow__label {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.section-eyebrow__rule {
+  height: 1px;
+  background: rgba(212, 175, 55, 0.3);
+  flex: 1;
+  max-width: 60px;
+}
+
+.section-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* ─── Responsive grid breakpoints (consolidated from component <style> tags) ─── */
+
+/* Hero */
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr 1fr !important; }
+  .hero-chart { display: block !important; }
+}
+@media (max-width: 899px) {
+  .hero-chart { display: none; }
+}
+
+/* ForexIntro */
+@media (min-width: 900px) {
+  .intro-grid { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* Coaches */
+@media (min-width: 900px) {
+  .coaches-grid { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* Testimonials */
+@media (min-width: 640px) {
+  .testimonials-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (min-width: 1024px) {
+  .testimonials-grid { grid-template-columns: 1fr 1fr 1fr !important; }
+}
+
+/* FAQ */
+@media (min-width: 900px) {
+  .faq-grid { grid-template-columns: 1fr 1.5fr !important; }
+}
+
+/* Footer */
+@media (min-width: 768px) {
+  .footer-grid { grid-template-columns: 1.5fr 1fr 1fr !important; }
 }
