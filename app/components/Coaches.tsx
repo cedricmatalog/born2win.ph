@@ -39,7 +39,7 @@ export default function Coaches() {
         position: 'absolute', top: '-2rem', left: '-1rem', zIndex: 0, opacity: 0.5,
       }}>03</div>
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }} className="inner">
 
         {/* Header */}
         <div style={{ marginBottom: '4rem', maxWidth: '560px' }}>
@@ -58,10 +58,10 @@ export default function Coaches() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }} className="coaches-grid">
           {COACHES.map(function renderCoach(c, i) {
             return (
-              <div key={i} style={{
+              <div key={i} className="coach-card" style={{
                 background: 'var(--surface)',
                 border: '1px solid rgba(212,175,55,0.12)',
-                padding: '2.5rem',
+                padding: '2rem',
                 position: 'relative',
                 overflow: 'hidden',
               }}>
@@ -72,58 +72,40 @@ export default function Coaches() {
                   borderLeft: '1px solid var(--border)',
                 }} />
 
-                <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                  {/* Avatar */}
+                {/* Avatar + name row */}
+                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center', marginBottom: '1.25rem' }}>
                   <div style={{
-                    width: '90px', height: '90px', flexShrink: 0,
+                    width: '72px', height: '72px', flexShrink: 0,
                     background: 'linear-gradient(135deg, var(--surface-2), #0A0A0A)',
                     border: '1px solid rgba(212,175,55,0.3)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     position: 'relative',
                   }}>
-                    <span className="font-display" style={{
-                      fontSize: '2rem', letterSpacing: '0.05em', color: 'var(--gold)',
-                    }}>{c.initials}</span>
-                    {/* Gold corner pip */}
-                    <div style={{
-                      position: 'absolute', bottom: '-1px', right: '-1px',
-                      width: '10px', height: '10px',
-                      background: 'var(--gold)',
-                    }} />
+                    <span className="font-display" style={{ fontSize: '1.75rem', letterSpacing: '0.05em', color: 'var(--gold)' }}>{c.initials}</span>
+                    <div style={{ position: 'absolute', bottom: '-1px', right: '-1px', width: '10px', height: '10px', background: 'var(--gold)' }} />
                   </div>
-
-                  {/* Info */}
-                  <div style={{ flex: 1, minWidth: '220px' }}>
-                    <div style={{
-                      fontSize: '0.6rem', letterSpacing: '0.18em',
-                      textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '4px',
-                    }}>{c.experience}</div>
-                    <h3 className="font-display" style={{
-                      fontSize: '2.2rem',
-                      letterSpacing: '0.05em', color: 'var(--text-primary)', margin: 0, lineHeight: 1,
-                    }}>{c.name}</h3>
-                    <div className="font-serif" style={{
-                      fontStyle: 'italic',
-                      fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '4px',
-                    }}>{c.role}</div>
-
-                    <p style={{
-                      fontSize: '0.9rem', lineHeight: 1.8,
-                      fontWeight: 300, color: 'var(--text-secondary)', marginTop: '1.25rem',
-                    }}>{c.bio}</p>
-
-                    {/* Stats */}
-                    <div style={{ display: 'flex', gap: '2rem', marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-                      {c.stats.map(function renderStat(s, j) {
-                        return (
-                          <div key={j}>
-                            <div className="font-display" style={{ fontSize: '1.6rem', letterSpacing: '0.05em', color: 'var(--gold)' }}>{s.val}</div>
-                            <div style={{ fontSize: '0.6rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>{s.label}</div>
-                          </div>
-                        );
-                      })}
-                    </div>
+                  <div>
+                    <div style={{ fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '3px' }}>{c.experience}</div>
+                    <h3 className="font-display" style={{ fontSize: '2rem', letterSpacing: '0.05em', color: 'var(--text-primary)', margin: 0, lineHeight: 1 }}>{c.name}</h3>
+                    <div className="font-serif" style={{ fontStyle: 'italic', fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '3px' }}>{c.role}</div>
                   </div>
+                </div>
+
+                <p style={{
+                  fontSize: '0.9rem', lineHeight: 1.8,
+                  fontWeight: 300, color: 'var(--text-secondary)', margin: 0,
+                }}>{c.bio}</p>
+
+                {/* Stats */}
+                <div style={{ display: 'flex', gap: '2rem', marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+                  {c.stats.map(function renderStat(s, j) {
+                    return (
+                      <div key={j}>
+                        <div className="font-display" style={{ fontSize: '1.6rem', letterSpacing: '0.05em', color: 'var(--gold)' }}>{s.val}</div>
+                        <div style={{ fontSize: '0.6rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>{s.label}</div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             );

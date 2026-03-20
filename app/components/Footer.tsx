@@ -38,7 +38,7 @@ export default function Footer() {
           color: 'rgba(0,0,0,0.1)', letterSpacing: '0.05em', userSelect: 'none',
         }}>FREE</div>
 
-        <div style={{
+        <div className="inner" style={{
           maxWidth: '1280px', margin: '0 auto',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           flexWrap: 'wrap', gap: '1.5rem', position: 'relative', zIndex: 1,
@@ -54,7 +54,7 @@ export default function Footer() {
               Attend Our Free 3-Hour Online Workshop
             </h3>
           </div>
-          <a href="/free-webinar" style={{
+          <a href="/free-webinar" className="footer-cta-btn" style={{
             display: 'inline-block',
             background: '#000',
             color: 'var(--gold)',
@@ -74,7 +74,7 @@ export default function Footer() {
       </div>
 
       {/* Footer body */}
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '3.5rem 2rem 2rem' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', paddingTop: '3.5rem', paddingBottom: '2rem' }} className="inner">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', marginBottom: '3rem' }} className="footer-grid">
 
           {/* Brand */}
@@ -151,7 +151,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="gold-rule" />
-        <div style={{
+        <div className="footer-bottom" style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           flexWrap: 'wrap', gap: '1rem', paddingTop: '1.5rem',
         }}>

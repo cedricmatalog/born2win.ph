@@ -46,7 +46,7 @@ export default function FAQ() {
         position: 'absolute', bottom: '-2rem', right: '-1rem', zIndex: 0, opacity: 0.5,
       }}>06</div>
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }} className="inner">
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem' }} className="faq-grid">
 

@@ -5,6 +5,7 @@ import Coaches from "./components/Coaches";
 import Features from "./components/Features";
 import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
+import TradingSessions from "./components/TradingSessions";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <ForexIntro />
       <Coaches />
       <Features />
+      <TradingSessions />
       <Testimonials />
       <FAQ />
       <Footer />

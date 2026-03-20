@@ -70,7 +70,7 @@ export default function Features() {
       {/* Diagonal stripe */}
       <div className="stripe-bg" style={{ position: 'absolute', inset: 0, zIndex: 0 }} />
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }} className="inner">
 
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '4rem', flexWrap: 'wrap', gap: '2rem' }}>
@@ -90,12 +90,12 @@ export default function Features() {
           {FEATURES.map(function renderFeature(f, i) {
             return (
               <div key={i}
-                className="hover-row"
+                className="hover-row feature-row"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '80px 1fr',
                   gap: '2rem',
-                  padding: '2rem 0',
+                  padding: '1.5rem 0',
                   borderTop: '1px solid rgba(255,255,255,0.05)',
                   alignItems: 'flex-start',
                 }}

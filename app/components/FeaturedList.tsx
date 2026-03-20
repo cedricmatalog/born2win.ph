@@ -49,7 +49,7 @@ export default function FeaturedList() {
   return (
     <section style={{ background: '#0A0A0A', padding: 'clamp(4rem,8vw,7rem) 0', borderBottom: '1px solid rgba(212,175,55,0.08)', position: 'relative', overflow: 'hidden' }}>
       <div className="section-num" style={{ position: 'absolute', top: '-2rem', right: '-1rem', opacity: 0.2, fontSize: 'clamp(6rem,16vw,14rem)' }}>04</div>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }} className="inner">
 
         <div style={{ marginBottom: '3rem' }}>
           <SectionHeader eyebrow="As Featured In">

@@ -19,7 +19,7 @@ export default function ForexIntro() {
         position: 'absolute', bottom: '-3rem', right: '-1rem', zIndex: 0, opacity: 0.6,
       }}>02</div>
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }} className="inner">
 
         {/* Section label */}
         <div className="section-eyebrow" style={{ marginBottom: '3rem' }}>
@@ -77,7 +77,7 @@ export default function ForexIntro() {
           {/* Video placeholder */}
           <div style={{ position: 'relative' }}>
             {/* Offset border frame */}
-            <div style={{
+            <div className="video-offset-frame" style={{
               position: 'absolute',
               top: '1rem', left: '1rem', right: '-1rem', bottom: '-1rem',
               border: '1px solid rgba(212,175,55,0.2)',

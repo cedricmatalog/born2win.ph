@@ -58,7 +58,7 @@ export default function ContactPage() {
         {/* Ghost letters */}
         <div className="section-num" style={{ position: 'absolute', bottom: '-3rem', right: '-1rem', zIndex: 0, opacity: 0.3, fontSize: 'clamp(8rem,22vw,20rem)' }}>CT</div>
 
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }} className="inner">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', alignItems: 'flex-end' }} className="ct-hero-grid">
             {/* Left: Headline */}
             <div>
@@ -99,7 +99,7 @@ export default function ContactPage() {
       {/* ── FORM + INFO ── */}
       <section style={{ background: '#0A0A0A', padding: 'clamp(4rem,8vw,7rem) 0', borderBottom: '1px solid rgba(212,175,55,0.08)', position: 'relative', overflow: 'hidden' }}>
         <div className="section-num" style={{ position: 'absolute', top: '-2rem', left: '-1rem', opacity: 0.2, fontSize: 'clamp(6rem,16vw,14rem)' }}>01</div>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }} className="inner">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem', alignItems: 'start' }} className="ct-form-grid">
 
             {/* Form */}

@@ -363,20 +363,64 @@ body {
   max-width: 60px;
 }
 
+/* ─── Mobile-first base ─── */
+
+/* Tighter horizontal padding on small screens */
+.page-pad,
+.hero-content-pad {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+@media (min-width: 640px) {
+  .page-pad,
+  .hero-content-pad {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* Inner section containers */
+.inner {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+@media (min-width: 640px) {
+  .inner { padding-left: 2rem; padding-right: 2rem; }
+}
+
+/* Buttons full-width on mobile */
+@media (max-width: 639px) {
+  .btn-gold, .btn-ghost {
+    width: 100%;
+    text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .btn-row {
+    flex-direction: column;
+  }
+}
+
+/* Section headings — tighter on mobile */
 .section-heading {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2rem, 8vw, 5rem);
   line-height: 1;
   letter-spacing: 0.03em;
   color: var(--text-primary);
   margin: 0;
 }
 
-/* ─── Responsive grid breakpoints (consolidated from component <style> tags) ─── */
+/* Ghost letters hidden on very small screens */
+@media (max-width: 480px) {
+  .section-num { display: none; }
+}
+
+/* ─── Responsive grid breakpoints ─── */
 
 /* Hero */
 @media (min-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr 1fr !important; }
+  .hero-grid  { grid-template-columns: 1fr 1fr !important; }
   .hero-chart { display: block !important; }
 }
 @media (max-width: 899px) {
@@ -387,10 +431,22 @@ body {
 @media (min-width: 900px) {
   .intro-grid { grid-template-columns: 1fr 1fr !important; }
 }
+/* video offset frame hidden on mobile to prevent overflow */
+@media (max-width: 639px) {
+  .video-offset-frame { display: none; }
+}
 
 /* Coaches */
 @media (min-width: 900px) {
   .coaches-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 639px) {
+  .coach-info { min-width: 0 !important; }
+}
+
+/* Features */
+@media (max-width: 639px) {
+  .feature-row { grid-template-columns: 48px 1fr !important; gap: 1rem !important; }
 }
 
 /* Testimonials */
@@ -409,4 +465,26 @@ body {
 /* Footer */
 @media (min-width: 768px) {
   .footer-grid { grid-template-columns: 1.5fr 1fr 1fr !important; }
+}
+@media (max-width: 639px) {
+  .footer-bottom { flex-direction: column; align-items: flex-start !important; }
+  .footer-cta-btn { width: 100%; text-align: center; }
+}
+
+/* Trading sessions */
+@media (max-width: 639px) {
+  .session-row {
+    grid-template-columns: 1fr auto !important;
+    grid-template-rows: auto auto;
+  }
+  .session-row > *:nth-child(2) {
+    grid-column: 1 / -1;
+  }
+  .session-pairs { display: none; }
+  .sessions-header { gap: 1.5rem !important; }
+}
+
+/* Webinar countdown */
+@media (max-width: 359px) {
+  .countdown-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }

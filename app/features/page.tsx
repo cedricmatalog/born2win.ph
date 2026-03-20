@@ -41,7 +41,7 @@ export default function FeaturesPage() {
         {/* Ghost letters */}
         <div className="section-num" style={{ position: 'absolute', bottom: '-3rem', left: '-1rem', zIndex: 0, opacity: 0.3, fontSize: 'clamp(8rem,22vw,20rem)' }}>PR</div>
 
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }} className="inner">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', alignItems: 'flex-end' }} className="pr-hero-grid">
             {/* Left: headline */}
             <div>
